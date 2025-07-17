@@ -72,7 +72,25 @@ class GenerateApplication:
 
         with open(_file, "w") as f:
             f.writelines(lines)
+    def _patch_sdk_version(self) -> None:
+        """
+        Patch LC_BUILD_VERSION in Load Command to report the macOS 26 SDK
 
+        This will enable the Solarium refresh when running on macOS 26
+        Minor visual anomalies and padding issues exist, disable if not addressed before release
+        """
+        _file = self._application_output / "Contents" / "MacOS" / "OpenCore-Patcher"
+
+        _find    = b'\x00\x01\x0C\x00'
+        _replace = b'\x00\x00\x1A\x00'
+
+        print("Patching LC_BUILD_VERSION")
+        with open(_file, "rb") as f:
+            data = f.read()
+            data = data.replace(_find, _replace, 1)
+
+        with open(_file, "wb") as f:
+            f.write(data)
 
     def _remove_analytics_key(self) -> None:
         """
@@ -170,7 +188,7 @@ class GenerateApplication:
         self._embed_analytics_key()
         self._generate_application()
         self._remove_analytics_key()
-
+        self._patch_sdk_version() if not self._git_branch or not self._git_branch.startswith('refs/tags') else None
         self._patch_load_command()
         self._embed_git_data()
         self._embed_resources()
