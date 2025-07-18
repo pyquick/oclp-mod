@@ -75,12 +75,12 @@ class MainFrame(wx.Frame):
         """
 
         # Title label: OCLP-Mod v{X.Y.Z}
-        title_label = wx.StaticText(self, label=f"OCLP Modified By pyquick {'' if self.constants.special_build else ''}{self.constants.patcher_version}{'' if not self.constants.commit_info[0].startswith('refs/tags') else ''}", pos=(-1, 10))
+        title_label = wx.StaticText(self, label=f"OCLP-Mod {'' if self.constants.special_build else ''}{self.constants.patcher_version}{'' if not self.constants.commit_info[0].startswith('refs/tags') else ''}", pos=(-1, 10))
         title_label.SetFont(gui_support.font_factory(19, wx.FONTWEIGHT_BOLD))
         title_label.Centre(wx.HORIZONTAL)
 
         # Text: Model: {Build or Host Model}
-        model_label = wx.StaticText(self, label=f"型号: {self.constants.custom_model or self.constants.computer.real_model} ，modified by pyquick", pos=(-1, title_label.GetPosition()[1] + 25
+        model_label = wx.StaticText(self, label=f"型号: {self.constants.custom_model or self.constants.computer.real_model} ", pos=(-1, title_label.GetPosition()[1] + 25
                                                                                                                                     ))
         model_label.SetFont(gui_support.font_factory(13, wx.FONTWEIGHT_NORMAL))
         model_label.Centre(wx.HORIZONTAL)
@@ -105,6 +105,15 @@ class MainFrame(wx.Frame):
                 ],
                 "icon": str(self.constants.icns_resource_path / "OC-Installer.icns"),
             },
+            "KDK下载": {
+                "function": self.on_download_kdk_package,
+                "description": [
+                    "提供kdk下载",
+                    "这是下载所必须的,",
+                    "提供simplehac下载地址."
+                ],
+                "icon": str(self.constants.icns_resource_path / "Package.icns"),
+            },
             "⚙️ 设置": {
                 "function": self.on_settings,
                 "description": [
@@ -119,8 +128,16 @@ class MainFrame(wx.Frame):
                 ],
                 "icon": str(self.constants.icns_resource_path / "OC-Patch.icns"),
             },
-
-            "获取支持": {
+            "MetalLib下载": {
+                "function": self.on_download_ml_package,
+                "description": [
+                    "提供MetalLib下载",
+                    "这是Metal3802下载所必须的,",
+                    "提供simplehac下载地址."
+                ],
+                "icon": str(self.constants.icns_resource_path / "Package.icns"),
+            },
+             "获取支持": {
                 "function": self.on_help,
                 "description": [
                     "OCLP相关资源",
@@ -149,10 +166,15 @@ class MainFrame(wx.Frame):
                     icon.SetPosition((button_x - 7, button_y + 3))
                 if button_name == "创建OpenCore引导":
                     icon.SetSize((70, 70))
+                if button_name == "KDK下载":
+                    icon.SetSize((70, 70))
+                    icon.SetPosition((button_x-5,button_y + 3))
+                if button_name == "Metallib下载":
+                    icon.SetSize((70, 70))
+                    icon.SetPosition((button_x-5,button_y + 3))
             if button_name == "⚙️ 设置":
-                button_y += 5
+                button_y += 15
                 button_x += 150
-
             button = wx.Button(self, label=button_name, pos=(button_x + 70, button_y), size=(180, 30))
             button.SetFont(gui_support.font_factory(13, wx.FONTWEIGHT_NORMAL))
             button.Bind(wx.EVT_BUTTON, lambda event, function=button_function["function"]: function(event))
@@ -172,7 +194,6 @@ class MainFrame(wx.Frame):
                     button_y += 13
 
             button_y += 25
-
             if button_name == "创建OpenCore引导":
                 self.build_button = button
                 if gui_support.CheckProperties(self.constants).host_can_build() is False:
@@ -184,12 +205,7 @@ class MainFrame(wx.Frame):
                   button.SetSize((100, -1))
                   #button.Centre(wx.HORIZONTAL)
                   description_label.Centre(wx.HORIZONTAL)
-                  kdk_button = wx.Button(self, label="KDK下载", pos=(button_x - 50, button.GetPosition()[1]), size=(100, 30))
-                  kdk_button.SetFont(gui_support.font_factory(13, wx.FONTWEIGHT_NORMAL))
-                  kdk_button.Bind(wx.EVT_BUTTON, lambda event: self.on_download_kdk_package(event))
-                  ml_button = wx.Button(self, label="MetalLib下载", pos=(button_x + 190, button.GetPosition()[1]), size=(100, 30))
-                  ml_button.SetFont(gui_support.font_factory(13, wx.FONTWEIGHT_NORMAL))
-                  ml_button.Bind(wx.EVT_BUTTON, lambda event: self.on_download_ml_package(event))
+                  
                   #button_y += 60  # 调整按钮的垂直位置
 
             index += 1
@@ -197,8 +213,6 @@ class MainFrame(wx.Frame):
                 max_height = button_y
                 button_x = 320
                 button_y = model_label.GetPosition()[1] + 30
-
-
         # Text: Copyright
         copy_label = wx.StaticText(self, label=self.constants.copyright_date, pos=(-1, max_height - 15))
         copy_label.SetFont(gui_support.font_factory(10, wx.FONTWEIGHT_NORMAL))
