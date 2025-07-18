@@ -168,10 +168,10 @@ class MainFrame(wx.Frame):
                     icon.SetSize((70, 70))
                 if button_name == "KDK下载":
                     icon.SetSize((70, 70))
-                    icon.SetPosition((button_x-5,button_y + 3))
+                    #icon.SetPosition((button_x - 5,button_y + 3))
                 if button_name == "Metallib下载":
-                    icon.SetSize((70, 70))
-                    icon.SetPosition((button_x-5,button_y + 3))
+                    icon.SetSize((80, 80))
+                    #icon.SetPosition((button_x - 5,button_y + 3))
             if button_name == "⚙️ 设置":
                 button_y += 15
                 button_x += 150

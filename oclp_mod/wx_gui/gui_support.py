@@ -180,7 +180,19 @@ class CheckProperties:
                 return True
         return False
 
+    def host_is_solarium(self) -> bool:
+        """
+        Check if running on macOS 26, and if Solarium refresh is enabled
+        """
 
+        if self.constants.detected_os < os_data.os_data.tahoe:
+            return False
+
+        # If we are a release build, we are not Solarium for now
+        if self.constants.commit_info[0].startswith('refs/tags'):
+            return False
+
+        return True
     def host_psp_version(self) -> packaging.version.Version:
         """
         Grab PatcherSupportPkg version from oclp-mod.plist

@@ -15,7 +15,7 @@ class Constants:
         # Patcher Versioning
         self.patcher_version:                 str = "3.0.0"  # oclp-mod
         self.patcher_support_pkg_version:     str = "1.9.8"  # PatcherSupportPkg
-        self.copyright_date:                  str = "Copyright © 2020-2025 Dortania ,laobamac and pyquick"
+        self.copyright_date:                  str = "Copyright © 2020-2025 Dortania and pyquick"
         self.patcher_name:                    str = "OCLP-Mod"
 
         # URLs
