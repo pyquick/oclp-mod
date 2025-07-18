@@ -277,9 +277,9 @@ class HardwarePatchsetDetection:
 
     def _laobamac_internal_check(self) -> None:
         """
-        Determine whether to unlock laobamac Developer mode
+        Determine whether to unlock pyquick Developer mode
         """
-        return Path("~/.laobamac_developer").expanduser().exists()
+        return Path("~/.pyquick_developer").expanduser().exists()
 
 
     def _already_has_networking_patches(self) -> bool:

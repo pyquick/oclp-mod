@@ -22,8 +22,8 @@ datas = [
    ('Universal-Binaries.dmg', '.'),
 ]
 
-if Path("laobamacInternalResources.dmg").exists():
-   datas.append(('laobamacInternalResources.dmg', '.'))
+if Path("pyquickInternalResources.dmg").exists():
+   datas.append(('pyquickInternalResources.dmg', '.'))
 
 
 a = Analysis(['OCLP-Mod-GUI.command'],
@@ -71,7 +71,7 @@ coll = COLLECT(exe,
 app = BUNDLE(coll,
              name='OCLP-Mod.app',
              icon="payloads/Icon/AppIcons/OC-Patcher.icns",
-             bundle_identifier="com.laobamac.oclp-mod",
+             bundle_identifier="com.pyquick.oclp-mod",
              info_plist={
                 "CFBundleName": "OCLP-Mod",
                 "CFBundleVersion": constants.Constants().patcher_version,

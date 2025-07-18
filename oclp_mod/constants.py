@@ -15,16 +15,16 @@ class Constants:
         # Patcher Versioning
         self.patcher_version:                 str = "3.0.0"  # oclp-mod
         self.patcher_support_pkg_version:     str = "1.9.8"  # PatcherSupportPkg
-        self.copyright_date:                  str = "Copyright © 2020-2025 Dortania and laobamac"
+        self.copyright_date:                  str = "Copyright © 2020-2025 Dortania ,laobamac and pyquick"
         self.patcher_name:                    str = "OCLP-Mod"
 
         # URLs
-        self.url_patcher_support_pkg:         str = "https://github.com/laobamac/PatcherSupportPkg/releases/download/"
+        self.url_patcher_support_pkg:         str = "https://github.com/pyquick/PatcherSupportPkg/releases/download/"
         self.discord_link:                    str = "https://discord.gg/rqdPgH8xSN"
-        self.guide_link:                      str = "https://laobamac.github.io/oclp-mod/"
-        self.repo_link:                       str = "https://github.com/laobamac/OCLP-Mod"
+        self.guide_link:                      str = "https://dortania.github.io/Opencore-Legacy-Patcher/"
+        self.repo_link:                       str = "https://github.com/pyquick/OCLP-Mod"
         self.installer_pkg_url:               str = f"{self.repo_link}/releases/download/{self.patcher_version}/AutoPkg-Assets.pkg"
-        self.installer_pkg_url_nightly:       str = "http://nightly.link/laobamac/oclp-mod/workflows/build-app-wxpython/main/AutoPkg-Assets.pkg.zip"
+        self.installer_pkg_url_nightly:       str = "http://nightly.link/pyquick/oclp-mod/workflows/build-app-wxpython/main/AutoPkg-Assets.pkg.zip"
 
         # OpenCore Versioning
         # https://github.com/acidanthera/OpenCorePkg
@@ -76,7 +76,7 @@ class Constants:
         self.apple_spi_hid_version: str = "1.0.0"  #  AppleHSSPIHIDDriver (14.4 Beta 1)
         self.kernel_relay_version:  str = "1.0.0"  #  KernelRelayHost (15.0 Beta 3)
 
-        ## Apple - laobamac Modified
+        ## Apple - pyquick Modified
         self.bcm570_version:           str = "1.0.2"  # CatalinaBCM5701Ethernet
         self.i210_version:             str = "1.0.0"  # CatalinaIntelI210Ethernet
         self.corecaptureelcap_version: str = "1.0.2"  # corecaptureElCap
@@ -89,8 +89,8 @@ class Constants:
         ## Apple - Jazzzny Modified
         self.aquantia_version: str = "1.1.0"  # AppleEthernetAbuantiaAqtion
 
-        ## laobamac
-        ## https://github.com/laobamac
+        ## pyquick
+        ## https://github.com/pyquick
         self.backlight_injector_version:     str = "1.1.0"  # BacklightInjector
         self.backlight_injectorA_version:    str = "1.0.0"  # BacklightInjector (iMac9,1)
         self.smcspoof_version:               str = "1.0.0"  # SMC-Spoof
@@ -297,19 +297,19 @@ class Constants:
 
     @property
     def auto_patch_launch_agent_path(self):
-        return self.launch_services_path / Path("com.laobamac.oclp-mod.auto-patch.plist")
+        return self.launch_services_path / Path("com.pyquick.oclp-mod.auto-patch.plist")
 
     @property
     def rsr_monitor_launch_daemon_path(self):
-        return self.launch_services_path / Path("com.laobamac.oclp-mod.rsr-monitor.plist")
+        return self.launch_services_path / Path("com.pyquick.oclp-mod.rsr-monitor.plist")
 
     @property
     def update_launch_daemon_path(self):
-        return self.launch_services_path / Path("com.laobamac.oclp-mod.macos-update.plist")
+        return self.launch_services_path / Path("com.pyquick.oclp-mod.macos-update.plist")
 
     @property
     def kdk_launch_daemon_path(self):
-        return self.launch_services_path / Path("com.laobamac.oclp-mod.os-caching.plist")
+        return self.launch_services_path / Path("com.pyquick.oclp-mod.os-caching.plist")
 
     # ACPI
     @property

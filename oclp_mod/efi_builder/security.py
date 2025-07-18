@@ -64,7 +64,7 @@ class BuildSecurity:
             self.config["NVRAM"]["Add"]["4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102"]["OCLP-Settings"] += " -allow_fv"
 
             # Patch KC UUID panics due to RSR installation
-            # - Ref: https://github.com/laobamac/oclp-mod/issues/1019
+            # - Ref: https://github.com/pyquick/oclp-mod/issues/1019
             logging.info("- 启用 KC UUID 不匹配补丁")
             self.config["NVRAM"]["Add"]["7C436110-AB2A-4BBB-A880-FE41995C9F82"]["boot-args"] += " -nokcmismatchpanic"
             support.BuildSupport(self.model, self.constants, self.config).enable_kext("RSRHelper.kext", self.constants.rsrhelper_version, self.constants.rsrhelper_path)

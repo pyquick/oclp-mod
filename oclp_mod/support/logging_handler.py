@@ -73,13 +73,13 @@ class InitializeLoggingSupport:
             # 可能处于安装环境，存储在 /Users/Shared
             base_path = Path("/Users/Shared")
         else:
-            # 如果 laobamac 文件夹不存在则创建
-            base_path = base_path / "laobamac"
+            # 如果 pyquick 文件夹不存在则创建
+            base_path = base_path / "pyquick"
             if not base_path.exists():
                 try:
                     base_path.mkdir()
                 except Exception as e:
-                    print(f"创建 laobamac 文件夹失败: {e}")
+                    print(f"创建 pyquick 文件夹失败: {e}")
                     base_path = Path("/Users/Shared")
 
         self.log_filepath = Path(f"{base_path}/{self.log_filename}").expanduser()
@@ -93,7 +93,7 @@ class InitializeLoggingSupport:
         """
 
         paths = [
-            self.log_filepath.parent,        # ~/Library/Logs/laobamac
+            self.log_filepath.parent,        # ~/Library/Logs/pyquick
             self.log_filepath.parent.parent, # ~/Library/Logs (旧位置)
         ]
 
@@ -218,7 +218,7 @@ class InitializeLoggingSupport:
             if cant_log is True:
                 error_msg += "\n\n显示日志文件？"
             else:
-                error_msg += "\n\n向 laobamac 发送崩溃报告？"
+                error_msg += "\n\n向 pyquick 发送崩溃报告？"
 
             # 询问用户是否要发送崩溃报告
             try:

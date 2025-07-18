@@ -5,13 +5,13 @@
 </div>
 <br>
 
-[OCLP-Mod](https://github.com/laobamac/OCLP-Mod) 是基于 Python 的修改版项目，核心基于 [Acidanthera 的 OpenCorePkg](https://github.com/acidanthera/OpenCorePkg) 和 [Lilu](https://github.com/acidanthera/Lilu)，用于在支持或不支持的 Mac 设备上运行并解锁 macOS 功能。
+[OCLP-Mod](https://github.com/pyquick/OCLP-Mod) 是基于 Python 的修改版项目，核心基于 [Acidanthera 的 OpenCorePkg](https://github.com/acidanthera/OpenCorePkg) 和 [Lilu](https://github.com/acidanthera/Lilu)，用于在支持或不支持的 Mac 设备上运行并解锁 macOS 功能。
 
 新增中文支持、Sequoia 系统下的英特尔无线网卡驱动、KDK/MetalLib 文件加速下载链接等功能。
 
 ----------
 
-![GitHub 所有版本](https://img.shields.io/github/release/laobamac/OCLP-Mod) ![GitHub 主要语言](https://img.shields.io/github/languages/top/laobamac/OCLP-Mod?color=4B8BBE&style=plastic) ![GitHub 许可证](https://img.shields.io/github/license/laobamac/OCLP-Mod) [Telegram 群组](https://t.me/simplehac1)
+![GitHub 所有版本](https://img.shields.io/github/release/pyquick/OCLP-Mod) ![GitHub 主要语言](https://img.shields.io/github/languages/top/pyquick/OCLP-Mod?color=4B8BBE&style=plastic) ![GitHub 许可证](https://img.shields.io/github/license/pyquick/OCLP-Mod) [Telegram 群组](https://t.me/simplehac1)
 
 ----------
 

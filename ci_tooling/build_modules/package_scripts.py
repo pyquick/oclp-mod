@@ -176,7 +176,7 @@ class ZSHFunctions:
         _script = ""
 
         _script += "function _fixSettingsFilePermission() {\n"
-        _script += "    local settingsPath=\"$pathToTargetVolume/Users/Shared/.com.laobamac.oclp-mod.plist\"\n\n"
+        _script += "    local settingsPath=\"$pathToTargetVolume/Users/Shared/.com.pyquick.oclp-mod.plist\"\n\n"
 
         _script += "    if [[ -e $settingsPath ]]; then\n"
         _script += "        echo \"Fixing settings file permissions: $settingsPath\"\n"
@@ -233,7 +233,7 @@ class ZSHFunctions:
         _script = ""
 
         _script += "function _cleanLaunchService() {\n"
-        _script += "    local domain=\"com.laobamac.oclp-mod\"\n\n"
+        _script += "    local domain=\"com.pyquick.oclp-mod\"\n\n"
 
         _script += "    # Iterate over launch agents and daemons\n"
         _script += "    for launchServiceVariant in \"$pathToTargetVolume/Library/LaunchAgents\" \"$pathToTargetVolume/Library/LaunchDaemons\"; do\n"
@@ -316,13 +316,13 @@ class GenerateScripts:
 
         self.files = [
             "Applications/OCLP-Mod.app",
-            "Library/Application Support/laobamac/Update.plist",
-            "Library/Application Support/laobamac/OCLP-Mod.app",
-            "Library/PrivilegedHelperTools/com.laobamac.oclp-mod.privileged-helper"
+            "Library/Application Support/pyquick/Update.plist",
+            "Library/Application Support/pyquick/OCLP-Mod.app",
+            "Library/PrivilegedHelperTools/com.pyquick.oclp-mod.privileged-helper"
         ]
 
         self.additional_auto_pkg_files = [
-            "Library/LaunchAgents/com.laobamac.oclp-mod.auto-patch.plist"
+            "Library/LaunchAgents/com.pyquick.oclp-mod.auto-patch.plist"
         ]
 
 
@@ -428,8 +428,8 @@ class GenerateScripts:
         _script += self._generate_label_bar()
         _script += "\n"
 
-        _script += "helperPath=\"Library/PrivilegedHelperTools/com.laobamac.oclp-mod.privileged-helper\"\n"
-        _script += "mainAppPath=\"Library/Application Support/laobamac/OCLP-Mod.app\"\n"
+        _script += "helperPath=\"Library/PrivilegedHelperTools/com.pyquick.oclp-mod.privileged-helper\"\n"
+        _script += "mainAppPath=\"Library/Application Support/pyquick/OCLP-Mod.app\"\n"
         _script += "shimAppPath=\"Applications/OCLP-Mod.app\"\n"
         if is_autopkg:
             _script += "executablePath=\"$mainAppPath/Contents/MacOS/OCLP-Mod\"\n"

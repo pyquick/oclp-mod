@@ -20,11 +20,11 @@ class GeneratePackage:
         Initialize
         """
         self._files = {
-            "./dist/OCLP-Mod.app": "/Library/Application Support/laobamac/OCLP-Mod.app",
-            "./ci_tooling/privileged_helper_tool/com.laobamac.oclp-mod.privileged-helper": "/Library/PrivilegedHelperTools/com.laobamac.oclp-mod.privileged-helper",
+            "./dist/OCLP-Mod.app": "/Library/Application Support/pyquick/OCLP-Mod.app",
+            "./ci_tooling/privileged_helper_tool/com.pyquick.oclp-mod.privileged-helper": "/Library/PrivilegedHelperTools/com.pyquick.oclp-mod.privileged-helper",
         }
         self._autopkg_files = {
-            "./payloads/Launch Services/com.laobamac.oclp-mod.auto-patch.plist": "/Library/LaunchAgents/com.laobamac.oclp-mod.auto-patch.plist",
+            "./payloads/Launch Services/com.pyquick.oclp-mod.auto-patch.plist": "/Library/LaunchAgents/com.pyquick.oclp-mod.auto-patch.plist",
         }
         self._autopkg_files.update(self._files)
 
@@ -36,8 +36,8 @@ class GeneratePackage:
         _welcome = ""
 
         _welcome += "# Overview\n"
-        _welcome += "## OCLP-Mod [Github](https://github.com/laobamac/OCLP-Mod)\n\n"
-        _welcome += "### Obey the MIT License & laobamac's License\n\n"
+        _welcome += "## OCLP-Mod [Github](https://github.com/pyquick/OCLP-Mod)\n\n"
+        _welcome += "### Obey the MIT License & pyquick's License\n\n"
         _welcome += f"This package will install the OCLP-Mod application (v{constants.Constants().patcher_version}) on your system."
 
         _welcome += "\n\nAdditionally, a shortcut for OCLP-Mod will be added in the '/Applications' folder."
@@ -61,8 +61,8 @@ class GeneratePackage:
 
         _welcome += "# Application Uninstaller\n"
         _welcome += "This package will uninstall the OCLP-Mod application and its Privileged Helper Tool from your system.\n\n"
-        _welcome += "## OCLP-Mod [Github](https://github.com/laobamac/OCLP-Mod)\n\n"
-        _welcome += "### Obey the MIT License & laobamac's License\n\n"
+        _welcome += "## OCLP-Mod [Github](https://github.com/pyquick/OCLP-Mod)\n\n"
+        _welcome += "### Obey the MIT License & pyquick's License\n\n"
         _welcome += "\n\n"
         _welcome += "This will not remove any root patches or OpenCore configurations that you may have installed using OCLP-Mod."
         _welcome += "\n\n"
@@ -96,7 +96,7 @@ class GeneratePackage:
 
         assert macos_pkg_builder.Packages(
             pkg_output="./dist/OCLP-Mod-Uninstaller.pkg",
-            pkg_bundle_id="com.laobamac.oclp-mod-uninstaller",
+            pkg_bundle_id="com.pyquick.oclp-mod-uninstaller",
             pkg_version=constants.Constants().patcher_version,
             pkg_background="./ci_tooling/pkg_assets/PkgBackground-Uninstaller.png",
             pkg_preinstall_script=_tmp_uninstall.name,
@@ -116,7 +116,7 @@ class GeneratePackage:
 
         assert macos_pkg_builder.Packages(
             pkg_output="./dist/OCLP-Mod.pkg",
-            pkg_bundle_id="com.laobamac.oclp-mod",
+            pkg_bundle_id="com.pyquick.oclp-mod",
             pkg_version=constants.Constants().patcher_version,
             pkg_allow_relocation=False,
             pkg_as_distribution=True,
@@ -139,7 +139,7 @@ class GeneratePackage:
 
         assert macos_pkg_builder.Packages(
             pkg_output="./dist/AutoPkg-Assets.pkg",
-            pkg_bundle_id="com.laobamac.pkg.AutoPkg-Assets",
+            pkg_bundle_id="com.pyquick.pkg.AutoPkg-Assets",
             pkg_version=constants.Constants().patcher_version,
             pkg_allow_relocation=False,
             pkg_as_distribution=True,

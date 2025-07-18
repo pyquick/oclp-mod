@@ -152,8 +152,8 @@ class UpdateFrame(wx.Frame):
         installed_label.SetFont(gui_support.font_factory(13, wx.FONTWEIGHT_BOLD))
         installed_label.Centre(wx.HORIZONTAL)
 
-        # Label: '/Library/Application Support/laobamac'
-        installed_path_label = wx.StaticText(self.frame, label='/Library/Application Support/laobamac', pos=(-1, installed_label.GetPosition().y + 20))
+        # Label: '/Library/Application Support/pyquick'
+        installed_path_label = wx.StaticText(self.frame, label='/Library/Application Support/pyquick', pos=(-1, installed_label.GetPosition().y + 20))
         installed_path_label.SetFont(gui_support.font_factory(13, wx.FONTWEIGHT_NORMAL))
         installed_path_label.Centre(wx.HORIZONTAL)
 
@@ -239,5 +239,5 @@ class UpdateFrame(wx.Frame):
         """
         Launches newly installed update
         """
-        logging.info("Launching update: '/Library/Application Support/laobamac/OCLP-Mod.app'")
-        subprocess.Popen(["/Library/Application Support/laobamac/OCLP-Mod.app/Contents/MacOS/OCLP-Mod", "--update_installed"])
+        logging.info("Launching update: '/Library/Application Support/pyquick/OCLP-Mod.app'")
+        subprocess.Popen(["/Library/Application Support/pyquick/OCLP-Mod.app/Contents/MacOS/OCLP-Mod", "--update_installed"])

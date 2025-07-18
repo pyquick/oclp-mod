@@ -40,10 +40,10 @@ class InstallAutomaticPatchingServices:
             return
 
         services = {
-            self.constants.auto_patch_launch_agent_path:        "/Library/LaunchAgents/com.laobamac.oclp-mod.auto-patch.plist",
-            self.constants.update_launch_daemon_path:           "/Library/LaunchDaemons/com.laobamac.oclp-mod.macos-update.plist",
-            **({ self.constants.rsr_monitor_launch_daemon_path: "/Library/LaunchDaemons/com.laobamac.oclp-mod.rsr-monitor.plist" } if self._create_rsr_monitor_daemon() else {}),
-            **({ self.constants.kdk_launch_daemon_path:         "/Library/LaunchDaemons/com.laobamac.oclp-mod.os-caching.plist" } if kdk_caching_needed is True else {} ),
+            self.constants.auto_patch_launch_agent_path:        "/Library/LaunchAgents/com.pyquick.oclp-mod.auto-patch.plist",
+            self.constants.update_launch_daemon_path:           "/Library/LaunchDaemons/com.pyquick.oclp-mod.macos-update.plist",
+            **({ self.constants.rsr_monitor_launch_daemon_path: "/Library/LaunchDaemons/com.pyquick.oclp-mod.rsr-monitor.plist" } if self._create_rsr_monitor_daemon() else {}),
+            **({ self.constants.kdk_launch_daemon_path:         "/Library/LaunchDaemons/com.pyquick.oclp-mod.os-caching.plist" } if kdk_caching_needed is True else {} ),
         }
 
         for service in services:

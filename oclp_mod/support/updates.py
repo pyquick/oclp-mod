@@ -21,7 +21,7 @@ from packaging import version
 from . import network_handler
 from .. import constants
 
-REPO_LATEST_RELEASE_URL: str = "https://api.github.com/repos/laobamac/OCLP-Mod/releases/latest"
+REPO_LATEST_RELEASE_URL: str = "https://api.github.com/repos/pyquick/OCLP-Mod/releases/latest"
 
 class CheckBinaryUpdates:
     def __init__(self, global_constants: constants.Constants) -> None:
@@ -63,7 +63,7 @@ class CheckBinaryUpdates:
                     "Name": asset["name"],
                     "Version": latest_remote_version,
                     "Link": asset["browser_download_url"],
-                    "Github Link": f"https://github.com/laobamac/OCLP-Mod/releases/{data_set['tag_name']}",
+                    "Github Link": f"https://github.com/pyquick/OCLP-Mod/releases/{data_set['tag_name']}",
                 }
 
         return None
@@ -72,7 +72,7 @@ from packaging import version
 from . import network_handler
 from .. import constants
 
-REPO_LATEST_RELEASE_URL: str = "https://api.github.com/repos/laobamac/OCLP-Mod/releases/latest"
+REPO_LATEST_RELEASE_URL: str = "https://api.github.com/repos/pyquick/OCLP-Mod/releases/latest"
 
 class CheckBinaryUpdates:
     def __init__(self, global_constants: constants.Constants) -> None:
@@ -114,7 +114,7 @@ class CheckBinaryUpdates:
                     "Name": asset["name"],
                     "Version": latest_remote_version,
                     "Link": asset["browser_download_url"],
-                    "Github Link": f"https://github.com/laobamac/OCLP-Mod/releases/{data_set['tag_name']}",
+                    "Github Link": f"https://github.com/pyquick/OCLP-Mod/releases/{data_set['tag_name']}",
                 }
 
         return None

@@ -88,7 +88,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: push-${{ github.sha }}
-          name: Pre-release for Tahoe-Test branch NOT STABLE VERSION
+          name: 3.0.0 Alpha
           body: ${{ github.event.head_commit.message }}
           prerelease: true
           files: |

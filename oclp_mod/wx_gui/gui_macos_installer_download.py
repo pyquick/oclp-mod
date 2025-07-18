@@ -305,11 +305,11 @@ class macOSInstallerDownloadFrame(wx.Frame):
                     print(f"数据格式错误: {item}")
             if self.fetched_aes_key_status != 200:
                 logging.info(f"无法获取到密钥 {self.fetched_aes_key_status}")
-                wx.MessageDialog(self.frame_modal, "未能获取到密钥，请联系laobamac", "错误", wx.OK | wx.ICON_ERROR).ShowModal()
+                wx.MessageDialog(self.frame_modal, "未能获取到密钥，请联系pyquick", "错误", wx.OK | wx.ICON_ERROR).ShowModal()
                 self.on_return_to_main_menu()
         else:
             logging.error("No dmgs found")
-            wx.MessageDialog(self.frame_modal, "未能获取到DMG信息，请联系laobamac", "错误", wx.OK | wx.ICON_ERROR).ShowModal()
+            wx.MessageDialog(self.frame_modal, "未能获取到DMG信息，请联系pyquick", "错误", wx.OK | wx.ICON_ERROR).ShowModal()
             self.on_return_to_main_menu()
 
         if not show_full:

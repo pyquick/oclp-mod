@@ -112,8 +112,8 @@ class PatcherSupportPkgMount:
         """
         # Only return on first attempt
         if attempt == 0:
-            if Path("~/.laobamac_developer_key").expanduser().exists():
-                return Path("~/.laobamac_developer_key").expanduser().read_text().strip()
+            if Path("~/.pyquick_developer_key").expanduser().exists():
+                return Path("~/.pyquick_developer_key").expanduser().read_text().strip()
 
         password = ""
         msg = "欢迎使用 laobamacInternal 计划，请提供解密密钥以访问内部资源。点击取消以跳过。"

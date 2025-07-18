@@ -4,10 +4,10 @@
 <dict>
 	<key>AssociatedBundleIdentifiers</key>
 	<array>
-		<string>com.laobamac.oclp-mod</string>
+		<string>com.pyquick.oclp-mod</string>
 	</array>
 	<key>Label</key>
-	<string>com.laobamac.oclp-mod.rsr-monitor</string>
+	<string>com.pyquick.oclp-mod.rsr-monitor</string>
 	<key>ProgramArguments</key>
 	<array>
 		<string>rm</string>

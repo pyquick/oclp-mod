@@ -4,13 +4,13 @@
 <dict>
 	<key>AssociatedBundleIdentifiers</key>
 	<array>
-		<string>com.laobamac.oclp-mod</string>
+		<string>com.pyquick.oclp-mod</string>
 	</array>
 	<key>Label</key>
-	<string>com.laobamac.oclp-mod.auto-patch</string>
+	<string>com.pyquick.oclp-mod.auto-patch</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/Library/Application Support/laobamac/OCLP-Mod.app/Contents/MacOS/OCLP-Mod</string>
+		<string>/Library/Application Support/pyquick/OCLP-Mod.app/Contents/MacOS/OCLP-Mod</string>
 		<string>--auto_patch</string>
 	</array>
 	<key>RunAtLoad</key>

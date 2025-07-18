@@ -83,7 +83,7 @@ class SettingsFrame(wx.Frame):
         sizer.Add(model_description, 0, wx.ALIGN_CENTER | wx.ALL, 5)
 
         tabs = list(self.settings.keys())
-        if not Path("~/.laobamac_developer").expanduser().exists():
+        if not Path("~/.pyquick_developer").expanduser().exists():
             tabs.remove("开发者")
         for tab in tabs:
             panel = wx.Panel(notebook)
@@ -833,7 +833,7 @@ class SettingsFrame(wx.Frame):
                     "variable": "DisableCrashAndAnalyticsReporting",
                     "description": [
                         "当启用时，修补程序将不会",
-                        "向laobamac报告任何信息。",
+                        "向pyquick报告任何信息。",
                     ],
                     "override_function": self._update_global_settings,
                 },
@@ -1198,7 +1198,7 @@ Commit Information:
 
 
     def on_generate_serial_number(self, event: wx.Event) -> None:
-        dlg = wx.MessageDialog(self.frame_modal, "使用序列号覆写时请小心，这只能在合法获得并需要重新覆写序列号的机器上使用。\n\n注意：新的序列号仅通过 OpenCore 覆盖，不会永久安装到 ROM 中。\n\n如果系统不需要仿冒，滥用此设置可能会破坏电源管理和操作系统。\n\nlaobamac 不容忍在被盗设备上使用OCLP-Mod！如经发现，OCLP-Mod将根据法律与MIT License追究责任。\n\n您确定要继续吗？", "警告", wx.YES_NO | wx.ICON_WARNING | wx.NO_DEFAULT)
+        dlg = wx.MessageDialog(self.frame_modal, "使用序列号覆写时请小心，这只能在合法获得并需要重新覆写序列号的机器上使用。\n\n注意：新的序列号仅通过 OpenCore 覆盖，不会永久安装到 ROM 中。\n\n如果系统不需要仿冒，滥用此设置可能会破坏电源管理和操作系统。\n\npyquick 不容忍在被盗设备上使用OCLP-Mod！如经发现，OCLP-Mod将根据法律与MIT License追究责任。\n\n您确定要继续吗？", "警告", wx.YES_NO | wx.ICON_WARNING | wx.NO_DEFAULT)
         if dlg.ShowModal() != wx.ID_YES:
             return
 
@@ -1324,7 +1324,7 @@ Commit Information:
         branches = ["main"]
         if self.constants.commit_info[0] not in ["Running from source", "Built from source"]:
             branches = [self.constants.commit_info[0].split("/")[-1]]
-        result = network_handler.NetworkUtilities().get("https://api.github.com/repos/laobamac/oclp-mod/branches")
+        result = network_handler.NetworkUtilities().get("https://api.github.com/repos/pyquick/oclp-mod/branches")
         if result is not None:
             result = result.json()
             for branch in result:
@@ -1346,7 +1346,7 @@ Commit Information:
             title=self.title,
             global_constants=self.constants,
             screen_location=self.parent.GetPosition(),
-            url=f"https://nightly.link/laobamac/oclp-mod/workflows/build-app-wxpython/{branch}/OCLP-Mod.pkg.zip",
+            url=f"https://nightly.link/pyquick/oclp-mod/workflows/build-app-wxpython/{branch}/OCLP-Mod.pkg.zip",
             version_label="(Nightly)"
         )
 

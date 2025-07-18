@@ -75,7 +75,7 @@ class StartAutomaticPatching:
             ID_GITHUB = wx.NewId()
             ID_UPDATE = wx.NewId()
 
-            url = "https://api.github.com/repos/laobamac/OCLP-Mod/releases/latest"
+            url = "https://api.github.com/repos/pyquick/OCLP-Mod/releases/latest"
             response = requests.get(url).json()
             try:
                 changelog = response["body"].split("## Asset Information")[0]
@@ -163,7 +163,7 @@ class StartAutomaticPatching:
                 logging.info("- 在Github上未发现新二进制文件，继续进行修补")
 
                 warning_str = ""
-                #if network_handler.NetworkUtilities("https://api.github.com/repos/laobamac/oclp-mod/releases/latest").verify_network_connection() is False:
+                #if network_handler.NetworkUtilities("https://api.github.com/repos/pyquick/oclp-mod/releases/latest").verify_network_connection() is False:
                 #    warning_str = f"""\n\n警告：我们无法验证Github上是否有OCLP-Mod的新版本。请注意，您可能正在使用一个过时的版本。如果您不确定，请在Github上验证OCLP-Mod {self.constants.patcher_version}是否为最新官方版本"""
 
                 args = [

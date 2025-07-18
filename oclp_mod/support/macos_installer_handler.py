@@ -268,7 +268,7 @@ class LocalInstallerCatalog:
 
             if min_required == os_data.os_data.sierra and kernel == os_data.os_data.ventura:
                 # Ventura 的安装程序要求最低为 El Capitan
-                # 参考: https://github.com/laobamac/oclp-mod/discussions/1038
+                # 参考: https://github.com/pyquick/oclp-mod/discussions/1038
                 min_required = os_data.os_data.el_capitan
 
             # app_version 有时会报告 GM 而不是实际版本
