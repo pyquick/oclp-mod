@@ -24,7 +24,8 @@ from . import (
 
 KDK_INSTALL_PATH: str  = "/Library/Developer/KDKs"
 KDK_INFO_PLIST:   str  = "KDKInfo.plist"
-KDK_API_LINK:     str  = "https://oclpapi.simplehac.cn/KdkSupportPkg/manifest.json"
+KDK_API_LINK_PROXY:     str  = "https://oclpapi.simplehac.cn/KdkSupportPkg/manifest.json"
+KDK_API_LINK_ORIGIN:     str  = "https://dortania.github.io/KdkSupportPkg/manifest.json"
 
 KDK_ASSET_LIST:   list = None
 
@@ -107,7 +108,10 @@ class KernelDebugKitObject:
         logging.info("从 KdkSupportPkg API 拉取 KDK 列表")
         if KDK_ASSET_LIST:
             return KDK_ASSET_LIST
-
+        if self.constants.use_github_proxy == True:
+            KDK_API_LINK:  str = KDK_API_LINK_PROXY
+        else:
+            KDK_API_LINK:  str = KDK_API_LINK_ORIGIN
         try:
             results = network_handler.NetworkUtilities().get(
                 KDK_API_LINK,

@@ -351,13 +351,13 @@ class MainFrame(wx.Frame):
 
         html_markdown = markdown2.markdown(changelog, extras=["tables"])
         html_css = css_data.updater_css
-        frame = wx.Dialog(None, -1, title="😘OCLP-Mod发现更新了捏！", size=(650, 500))
+        frame = wx.Dialog(None, -1, title="OCLP-Mod发现更新!", size=(650, 500))
         frame.SetMinSize((650, 500))
         frame.SetWindowStyle(wx.STAY_ON_TOP)
         panel = wx.Panel(frame)
         sizer = wx.BoxSizer(wx.VERTICAL)
         sizer.AddSpacer(10)
-        self.title_text = wx.StaticText(panel, label="新版本OCLP-Mod可以下载了！")
+        self.title_text = wx.StaticText(panel, label="新版本OCLP-Mod可以下载了!")
         self.description = wx.StaticText(panel, label=f"OCLP-Mod {oclp_version} 已发布   你现在安装的是 {self.constants.patcher_version}{'' if not self.constants.commit_info[0].startswith('refs/tags') else ''}， 你想现在更新吗？")
         self.title_text.SetFont(gui_support.font_factory(19, wx.FONTWEIGHT_BOLD))
         self.description.SetFont(gui_support.font_factory(13, wx.FONTWEIGHT_NORMAL))
@@ -417,13 +417,16 @@ class MainFrame(wx.Frame):
     
     def on_download_kdk_package(self, event: wx.Event = None):
         kdk_window = gui_kdk_dl.DownloadKDKFrame(
-            parent=self
+            parent=self,
+            global_constants=self.constants,
         )
         kdk_window.Show()
 
     def on_download_ml_package(self, event: wx.Event = None):
         ml_window = gui_ml_dl.DownloadMLFrame(
-            parent=self
+            parent=self,
+            #parent=self,
+            global_constants=self.constants,
         )
         ml_window.Show()
 

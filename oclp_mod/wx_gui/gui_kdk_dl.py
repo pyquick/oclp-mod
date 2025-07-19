@@ -3,9 +3,11 @@ import requests
 import threading
 from wx.lib.agw.customtreectrl import CustomTreeCtrl
 import time
-
+from ..constants import Constants
+from .. import constants
 kdkurl = ""
-
+KDK_API_LINK_PROXY:     str  = "https://oclpapi.simplehac.cn/KdkSupportPkg/manifest.json"
+KDK_API_LINK_ORIGIN:     str  = "https://dortania.github.io/KdkSupportPkg/manifest.json"
 class DownloadProgressFrame(wx.Frame):
     def __init__(self, parent, title, url, file_path):
         super(DownloadProgressFrame, self).__init__(parent, title=title, size=(400, 150))
@@ -107,7 +109,9 @@ class DownloadListCtrl(wx.ListCtrl):
             #kdkurl = item['url']
 
 class DownloadKDKFrame(wx.Frame):
-    def __init__(self, parent):
+    def __init__(self, parent, global_constants: Constants):
+        #self, parent, global_constants: Constants
+        self.constants: constants.Constants = global_constants
         super(DownloadKDKFrame, self).__init__(parent, title="KDK下载", size=(600, 400))
         panel = wx.Panel(self)
 
@@ -130,8 +134,12 @@ class DownloadKDKFrame(wx.Frame):
 
     def fetch_kdk_data(self):
         time.sleep(1)
+        if self.constants.use_github_proxy == True:
+            KDK_API_LINK: str = KDK_API_LINK_PROXY
+        else:
+            KDK_API_LINK: str = KDK_API_LINK_ORIGIN
         try:
-            response = requests.get("https://oclpapi.simplehac.cn/KdkSupportPkg/manifest.json")
+            response = requests.get(KDK_API_LINK)
             response.raise_for_status()
             kdk_data = response.json()
             wx.CallAfter(self.list_ctrl.SetData, kdk_data)

@@ -12,7 +12,7 @@ import logging
 import enum
 import hashlib
 import atexit
-
+from ..constants import Constants
 from typing import Union
 from pathlib import Path
 
@@ -31,7 +31,7 @@ class DownloadStatus(enum.Enum):
     ERROR:       str = "Error"
     COMPLETE:    str = "Complete"
 
-
+settings = Constants()
 class NetworkUtilities:
     """
     Utilities for network related tasks, primarily used for downloading files
@@ -41,7 +41,10 @@ class NetworkUtilities:
         self.url: str = url
 
         if self.url is None:
-            self.url = "https://oclpapi.simplehac.cn/"
+            if settings.use_github_proxy == True:
+                self.url = "https://oclpapi.simplehac.cn/"
+            else:
+                self.url = "https://dortania.github.io/"
 
 
     def verify_network_connection(self) -> bool:
