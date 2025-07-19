@@ -85,6 +85,7 @@ class SettingsFrame(wx.Frame):
         tabs = list(self.settings.keys())
         if not Path("~/.pyquick_developer").expanduser().exists():
             tabs.remove("开发者")
+            #pass
         for tab in tabs:
             panel = wx.Panel(notebook)
             notebook.AddPage(panel, tab)
@@ -880,7 +881,7 @@ class SettingsFrame(wx.Frame):
                         "在盲目更新前请检查更新日志。",
                     ],
                 },
-                "Trigger Exception": {
+                "测试错误报告弹窗": {
                     "type": "button",
                     "function": self.on_test_exception,
                     "description": [
@@ -889,7 +890,7 @@ class SettingsFrame(wx.Frame):
                 "wrap_around 1": {
                     "type": "wrap_around",
                 },
-                "Export constants": {
+                "导出constants": {
                     "type": "button",
                     "function": self.on_export_constants,
                     "description": [
@@ -904,9 +905,9 @@ class SettingsFrame(wx.Frame):
                     "type": "button",
                     "function": self.on_mount_root_vol,
                     "description": [
-                        "Life's too short to type 'sudo mount -o",
+                        "人生苦短，没时间每次都输入 'sudo mount -o",
                         "nobrowse -t apfs /dev/diskXsY",
-                        "/System/Volumes/Update/mnt1' every time.",
+                        "/System/Volumes/Update/mnt1'.",
                     ],
                 },
                 "wrap_around 2": {
@@ -1033,7 +1034,7 @@ class SettingsFrame(wx.Frame):
         # Textbox: Custom Serial Number
         custom_serial_number_textbox = wx.TextCtrl(panel, pos=(custom_serial_number_label.GetPosition()[0] - 27, custom_serial_number_label.GetPosition()[1] + 20), size=(200, 25))
         custom_serial_number_textbox.SetFont(gui_support.font_factory(13, wx.FONTWEIGHT_NORMAL))
-        #custom_serial_number_textbox.SetToolTip("Enter a custom serial number here. This will be used for the SMBIOS and iMessage.\n\nNote: This will not be used if the \"Use Custom Serial Number\" checkbox is not checked.")
+        
         custom_serial_number_textbox.SetToolTip("在此处输入自定义序列号。这将用于 SMBIOS 和 iMessage。\n\n注意：如果未选中 \"使用自定义序列号\" 复选框，则不会使用该复选按钮。")
         custom_serial_number_textbox.Bind(wx.EVT_TEXT, self.on_custom_serial_number_textbox)
         custom_serial_number_textbox.SetValue(self.constants.custom_serial_number)
@@ -1046,15 +1047,16 @@ class SettingsFrame(wx.Frame):
         # Textbox: Custom Board Serial Number
         custom_board_serial_number_textbox = wx.TextCtrl(panel, pos=(custom_board_serial_number_label.GetPosition()[0] - 5, custom_serial_number_textbox.GetPosition()[1]), size=(200, 25))
         custom_board_serial_number_textbox.SetFont(gui_support.font_factory(13, wx.FONTWEIGHT_NORMAL))
-        custom_board_serial_number_textbox.SetToolTip("Enter a custom board serial number here. This will be used for the SMBIOS and iMessage.\n\nNote: This will not be used if the \"Use Custom Board Serial Number\" checkbox is not checked.")
+        custom_board_serial_number_textbox.SetToolTip("在此处输入自定义主板序列号。此序列号将用于 SMBIOS 和 iMessage。\n\n注意：如果未勾选“使用自定义主板序列号”复选框，此序列号将不会被使用。")
         custom_board_serial_number_textbox.Bind(wx.EVT_TEXT, self.on_custom_board_serial_number_textbox)
         custom_board_serial_number_textbox.SetValue(self.constants.custom_board_serial_number)
         self.custom_board_serial_number_textbox = custom_board_serial_number_textbox
 
         # Button: Generate Serial Number (below)
-        generate_serial_number_button = wx.Button(panel, label=f"生成 S/N: {self.constants.custom_model or self.constants.computer.real_model}", pos=(title.GetPosition()[0] - 30, custom_board_serial_number_label.GetPosition()[1] + 60), size=(200, 25))
+        generate_serial_number_button = wx.Button(panel, label=f"生成 S/N: {self.constants.custom_model or self.constants.computer.real_model}", pos=(title.GetPosition()[0] - 30, custom_board_serial_number_label.GetPosition()[1] + 60), size=(220, 25))
         generate_serial_number_button.SetFont(gui_support.font_factory(13, wx.FONTWEIGHT_NORMAL))
         generate_serial_number_button.Bind(wx.EVT_BUTTON, self.on_generate_serial_number)
+        #generate_serial_number_button.Centre()
 
 
     def _populate_app_stats(self, panel: wx.Frame) -> None:
@@ -1380,13 +1382,13 @@ Commit Information:
     def on_mount_root_vol(self, event: wx.Event) -> None:
         #Don't need to pass model as we're bypassing all logic
         if sys_patch.PatchSysVolume("",self.constants)._mount_root_vol() == True:
-            wx.MessageDialog(self.parent, "Root Volume Mounted, remember to fix permissions before saving the Root Volume", "Success", wx.OK | wx.ICON_INFORMATION).ShowModal()
+            wx.MessageDialog(self.parent, "根卷已挂载，请记住在保存根卷之前修复权限。", "Success", wx.OK | wx.ICON_INFORMATION).ShowModal()
         else:
-            wx.MessageDialog(self.parent, "Root Volume Mount Failed, check terminal output", "Error", wx.OK | wx.ICON_ERROR).ShowModal()
+            wx.MessageDialog(self.parent, "根卷挂载错误, 检查终端输出", "Error", wx.OK | wx.ICON_ERROR).ShowModal()
 
     def on_bless_root_vol(self, event: wx.Event) -> None:
         #Don't need to pass model as we're bypassing all logic
         if sys_patch.PatchSysVolume("",self.constants)._rebuild_root_volume() == True:
-            wx.MessageDialog(self.parent, "Root Volume saved, please reboot to apply changes", "Success", wx.OK | wx.ICON_INFORMATION).ShowModal()
+            wx.MessageDialog(self.parent, "根卷已保存,请重启应用", "Success", wx.OK | wx.ICON_INFORMATION).ShowModal()
         else:
-            wx.MessageDialog(self.parent, "Root Volume update Failed, check terminal output", "Error", wx.OK | wx.ICON_ERROR).ShowModal()
+            wx.MessageDialog(self.parent, "根卷保存错误,请检查终端输出", "Error", wx.OK | wx.ICON_ERROR).ShowModal()
