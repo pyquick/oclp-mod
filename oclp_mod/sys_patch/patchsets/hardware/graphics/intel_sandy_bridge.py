@@ -33,6 +33,8 @@ class IntelSandyBridge(BaseHardware):
         """
         Targeting Intel Sandy Bridge GPUs
         """
+        if self._xnu_major == os_data.tahoe.value:
+            return False
         return self._is_gpu_architecture_present(
             gpu_architectures=[
                 device_probe.Intel.Archs.Sandy_Bridge

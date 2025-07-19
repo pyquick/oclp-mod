@@ -111,16 +111,12 @@ class NewKDKDownloadFrame(wx.Frame):
                 KDK_API_LINK: str = KDK_API_LINK_PROXY
             else:
                 KDK_API_LINK: str = KDK_API_LINK_ORIGIN
+            response = requests.get(KDK_API_LINK)
             # 获取 Apple 官方安装器目录内容
             sucatalog_contents = sucatalog.CatalogURL(seed=sucatalog.SeedType.DeveloperSeed).url_contents
             if sucatalog_contents is None:
                 logging.error("Failed to download Installer Catalog from Apple")
                 return
-
-            # 解析目录，获取所有产品和最新产品
-            self.available_installers        = sucatalog.CatalogProducts(sucatalog_contents).products
-            self.available_installers_latest = sucatalog.CatalogProducts(sucatalog_contents).latest_products
-
         thread = threading.Thread(target=_fetch_installers,daemon=True)
         thread.start()
 
