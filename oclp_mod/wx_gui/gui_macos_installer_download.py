@@ -112,13 +112,9 @@ class macOSInstallerDownloadFrame(wx.Frame):
         shdmg_button = wx.Button(frame, label="下载三分区镜像（.dmg)(未完工)", pos=(-1, existing_button.GetPosition()[1] + existing_button.GetSize()[1] - 5), size=(200, 30))
         shdmg_button.Bind(wx.EVT_BUTTON, self.on_downdmg)
         shdmg_button.Centre(wx.HORIZONTAL)
-        shdmg_button.Disable()
-
         fldmg_button = wx.Button(frame, label="烧录DMG镜像(.dmg)(未完工)", pos=(-1, shdmg_button.GetPosition()[1] + shdmg_button.GetSize()[1] - 5), size=(200, 30))
         fldmg_button.Bind(wx.EVT_BUTTON, self.on_flashdmg)
         fldmg_button.Centre(wx.HORIZONTAL)
-        fldmg_button.Disable()
-
         # Button: Return to Main Menu
         return_button = wx.Button(frame, label="返回", pos=(-1, fldmg_button.GetPosition()[1] + fldmg_button.GetSize()[1] + 5), size=(150, 30))
         return_button.Bind(wx.EVT_BUTTON, self.on_return)

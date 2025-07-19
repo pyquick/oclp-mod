@@ -8,7 +8,6 @@ import pprint
 import logging
 import py_sip_xnu
 import subprocess
-from ..check import check_system
 from pathlib import Path
 
 from .. import constants
@@ -834,16 +833,6 @@ class SettingsFrame(wx.Frame):
                         "关闭后将直接请求Github",
                     ],
                 },
-                "禁用KDK的下载": {
-                    "type": "checkbox",
-                    "value": self.constants.macos12_disable_kdk,
-                    "variable": "macos12_disable_kdk",
-                    "condition":check_system.check_kdk(),
-        
-                    "description": [
-                        "macOS12及以下版本无需使用KDK",
-                    ],
-                },
                 "wrap_around 1": {
                     "type": "wrap_around",
                 },
@@ -868,15 +857,6 @@ class SettingsFrame(wx.Frame):
                         "在根目录修补期间。",
                     ],
                     "override_function": self._update_global_settings,
-                },
-                "禁用Metallib的下载": {
-                    "type": "checkbox",
-                    "value": self.constants.macos15_disable_ml,
-                    "variable": "macos15_disable_ml",
-                    "condition": check_system.check_ml(),
-                    "description": [
-                        "macOS14及以下版本无需使用Metallib",
-                    ],
                 },
                 "统计": {
                     "type": "title",
