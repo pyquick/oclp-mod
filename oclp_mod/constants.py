@@ -245,6 +245,8 @@ class Constants:
         self.allow_usb_patch:        bool = False #  Allow USB Patch on Tahoe
         self.allow_hda_patch:        bool = False #  Allow HDA Patch on Tahoe
         self.use_github_proxy:        bool = True #  Use proxy to get resources on Github
+        self.macos12_disable_kdk:     bool = False
+        self.macos15_disable_ml:     bool = False
         ## Non-Metal OS support
         self.legacy_accel_support = [
             os_data.os_data.big_sur,

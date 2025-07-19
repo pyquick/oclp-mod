@@ -100,22 +100,24 @@ class macOSInstallerDownloadFrame(wx.Frame):
         title_label.Centre(wx.HORIZONTAL)
 
         # Button: Download macOS Installer
-        download_button = wx.Button(frame, label="下载macOS安装器（.app）", pos=(-1, title_label.GetPosition()[1] + title_label.GetSize()[1] + 5), size=(200, 30))
+        download_button = wx.Button(frame, label="下载macOS安装器(.app)", pos=(-1, title_label.GetPosition()[1] + title_label.GetSize()[1] + 5), size=(200, 30))
         download_button.Bind(wx.EVT_BUTTON, self.on_download)
         download_button.Centre(wx.HORIZONTAL)
 
         # Button: Use existing macOS Installer
-        existing_button = wx.Button(frame, label="选择本地的安装器（.app）", pos=(-1, download_button.GetPosition()[1] + download_button.GetSize()[1] - 5), size=(200, 30))
+        existing_button = wx.Button(frame, label="选择本地的安装器（.app)", pos=(-1, download_button.GetPosition()[1] + download_button.GetSize()[1] - 5), size=(200, 30))
         existing_button.Bind(wx.EVT_BUTTON, self.on_existing)
         existing_button.Centre(wx.HORIZONTAL)
 
-        shdmg_button = wx.Button(frame, label="下载三分区镜像（.dmg）", pos=(-1, existing_button.GetPosition()[1] + existing_button.GetSize()[1] - 5), size=(200, 30))
+        shdmg_button = wx.Button(frame, label="下载三分区镜像（.dmg)(未完工)", pos=(-1, existing_button.GetPosition()[1] + existing_button.GetSize()[1] - 5), size=(200, 30))
         shdmg_button.Bind(wx.EVT_BUTTON, self.on_downdmg)
         shdmg_button.Centre(wx.HORIZONTAL)
+        shdmg_button.Disable()
 
-        fldmg_button = wx.Button(frame, label="烧录DMG镜像（.dmg）", pos=(-1, shdmg_button.GetPosition()[1] + shdmg_button.GetSize()[1] - 5), size=(200, 30))
+        fldmg_button = wx.Button(frame, label="烧录DMG镜像(.dmg)(未完工)", pos=(-1, shdmg_button.GetPosition()[1] + shdmg_button.GetSize()[1] - 5), size=(200, 30))
         fldmg_button.Bind(wx.EVT_BUTTON, self.on_flashdmg)
         fldmg_button.Centre(wx.HORIZONTAL)
+        fldmg_button.Disable()
 
         # Button: Return to Main Menu
         return_button = wx.Button(frame, label="返回", pos=(-1, fldmg_button.GetPosition()[1] + fldmg_button.GetSize()[1] + 5), size=(150, 30))
