@@ -9,17 +9,11 @@ import threading
 import webbrowser
 import json
 import requests
-import time
-import urllib.parse
-import hashlib
-
 from pathlib import Path
-
 from .. import (
     constants,
     sucatalog
 )
-
 from ..datasets import (
     os_data,
     smbios_data,
@@ -113,7 +107,10 @@ class NewKDKDownloadFrame(wx.Frame):
         # 拉取安装器目录的线程，避免界面卡死
         def _fetch_installers():
             logging.info(f"Fetching installer catalog: {sucatalog.SeedType.DeveloperSeed.name}")
-
+            if self.constants.use_github_proxy == True:
+                KDK_API_LINK: str = KDK_API_LINK_PROXY
+            else:
+                KDK_API_LINK: str = KDK_API_LINK_ORIGIN
             # 获取 Apple 官方安装器目录内容
             sucatalog_contents = sucatalog.CatalogURL(seed=sucatalog.SeedType.DeveloperSeed).url_contents
             if sucatalog_contents is None:
@@ -133,6 +130,18 @@ class NewKDKDownloadFrame(wx.Frame):
         progress_bar_animation.stop_pulse()
         progress_bar.Hide()
         self._display_available_installers()
+    def fetch_kdk_data(self):
+        
+        try:
+            response = requests.get(KDK_API_LINK)
+            logging.debug("Fetching KDK data from " + KDK_API_LINK)
+            response.raise_for_status()
+            kdk_data = response.json()
+            wx.CallAfter(self.list_ctrl.SetData, kdk_data)
+            wx.CallAfter(self.loading_frame.close)
+        except requests.RequestException as e:
+            wx.MessageBox(f"获取KDK信息失败: {e}", "错误", wx.OK | wx.ICON_ERROR)
+            wx.CallAfter(self.loading_frame.close)
 
     def _display_available_installers(self, event: wx.Event = None, show_full: bool = False) -> None:
         """
@@ -424,19 +433,4 @@ class NewKDKDownloadFrame(wx.Frame):
         if self.frame_modal:
             self.frame_modal.Destroy()
         self.Destroy()
-    def fetch_kdk_data(self):
-        time.sleep(1)
-        if self.constants.use_github_proxy == True:
-            KDK_API_LINK: str = KDK_API_LINK_PROXY
-        else:
-            KDK_API_LINK: str = KDK_API_LINK_ORIGIN
-        try:
-            response = requests.get(KDK_API_LINK)
-            logging.debug("Fetching KDK data from " + KDK_API_LINK)
-            response.raise_for_status()
-            kdk_data = response.json()
-            wx.CallAfter(self.list_ctrl.SetData, kdk_data)
-            wx.CallAfter(self.loading_frame.close)
-        except requests.RequestException as e:
-            wx.MessageBox(f"获取KDK信息失败: {e}", "错误", wx.OK | wx.ICON_ERROR)
-            wx.CallAfter(self.loading_frame.close)
+    

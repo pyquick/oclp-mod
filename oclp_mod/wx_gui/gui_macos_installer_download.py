@@ -109,10 +109,10 @@ class macOSInstallerDownloadFrame(wx.Frame):
         existing_button.Bind(wx.EVT_BUTTON, self.on_existing)
         existing_button.Centre(wx.HORIZONTAL)
 
-        shdmg_button = wx.Button(frame, label="下载三分区镜像（.dmg)(未完工)", pos=(-1, existing_button.GetPosition()[1] + existing_button.GetSize()[1] - 5), size=(200, 30))
+        shdmg_button = wx.Button(frame, label="下载三分区镜像（.dmg)", pos=(-1, existing_button.GetPosition()[1] + existing_button.GetSize()[1] - 5), size=(200, 30))
         shdmg_button.Bind(wx.EVT_BUTTON, self.on_downdmg)
         shdmg_button.Centre(wx.HORIZONTAL)
-        fldmg_button = wx.Button(frame, label="烧录DMG镜像(.dmg)(未完工)", pos=(-1, shdmg_button.GetPosition()[1] + shdmg_button.GetSize()[1] - 5), size=(200, 30))
+        fldmg_button = wx.Button(frame, label="烧录DMG镜像(.dmg)", pos=(-1, shdmg_button.GetPosition()[1] + shdmg_button.GetSize()[1] - 5), size=(200, 30))
         fldmg_button.Bind(wx.EVT_BUTTON, self.on_flashdmg)
         fldmg_button.Centre(wx.HORIZONTAL)
         # Button: Return to Main Menu
@@ -195,8 +195,8 @@ class macOSInstallerDownloadFrame(wx.Frame):
         self.Show()
 
         def _fetch_dmg():
-            apiurl = "https://oclpapi.simplehac.cn/DMG?token=oclpmod"
-            aesurl = "https://oclpapi.simplehac.cn/DMG/aeskey.json"
+            apiurl = "https://oclpapi.simplehac.cn/DMG/api?token=oclpmod"
+            aesurl = "https://oclpapi.simplehac.cn/DMG/data/aeskey.txt"
 
             try:
                 # 发送 GET 请求
@@ -206,7 +206,9 @@ class macOSInstallerDownloadFrame(wx.Frame):
                 # 检查响应状态码是否为 200
                 if response.status_code == 200:
                     # 解析 JSON 数据
-                    dmgdata = response.json()  # 自动将 JSON 字符串解析为 Python 字典
+                    dmgdata = response.json() 
+                    #self.available_installers        = sucatalog.CatalogProducts(dmgdata).products
+                    #self.available_installers_latest = sucatalog.CatalogProducts(dmgdata).latest_products # 自动将 JSON 字符串解析为 Python 字典
                     logging.info("返回的 JSON 数据:")
                     dmgwell = json.dumps(dmgdata, indent=4, ensure_ascii=False)
                     logging.info(dmgwell)  # 格式化输出 JSON 数据
@@ -228,7 +230,7 @@ class macOSInstallerDownloadFrame(wx.Frame):
                     self.dmgs = dmgdata
                     logging.info(type(dmgdata))
                 else:
-                    logging.error("Lost it!")
+                    logging.error("Lost it!")  
 
         thread = threading.Thread(target=_fetch_dmg, args=())
         thread.start()
@@ -240,7 +242,7 @@ class macOSInstallerDownloadFrame(wx.Frame):
         self._display_available_dmgs()
 
     def generate_signed_url(self, download_url, aeskey):
-        API_URL = 'https://oclpapi.simplehac.cn/DMG/down.php'
+        API_URL = 'https://oclpapi.simplehac.cn/DMG/api/down.php'
 
         parsed_url = urllib.parse.urlparse(download_url)
         file_name = urllib.parse.unquote(parsed_url.path.split('/')[-1])
@@ -303,11 +305,11 @@ class macOSInstallerDownloadFrame(wx.Frame):
                     print(f"数据格式错误: {item}")
             if self.fetched_aes_key_status != 200:
                 logging.info(f"无法获取到密钥 {self.fetched_aes_key_status}")
-                wx.MessageDialog(self.frame_modal, "未能获取到密钥，请联系pyquick", "错误", wx.OK | wx.ICON_ERROR).ShowModal()
+                wx.MessageDialog(self.frame_modal, "未能获取到密钥，请联系laobamac", "错误", wx.OK | wx.ICON_ERROR).ShowModal()
                 self.on_return_to_main_menu()
         else:
             logging.error("No dmgs found")
-            wx.MessageDialog(self.frame_modal, "未能获取到DMG信息，请联系pyquick", "错误", wx.OK | wx.ICON_ERROR).ShowModal()
+            wx.MessageDialog(self.frame_modal, "未能获取到DMG信息，请联系laobamac", "错误", wx.OK | wx.ICON_ERROR).ShowModal()
             self.on_return_to_main_menu()
 
         if not show_full:
@@ -331,22 +333,21 @@ class macOSInstallerDownloadFrame(wx.Frame):
             self.copy_button.Disable()
         self.copy_button.SetToolTip("复制选定DMG的下载链接")
         self.copy_button.Bind(wx.EVT_BUTTON, lambda event, installers=dmgs: self.on_copy_dmg_link(installers))
-
         return_button = wx.Button(self.frame_modal, label="返回", pos=(-1, -1), size=(150, -1))
         return_button.Bind(wx.EVT_BUTTON, self.on_return_to_main_menu)
         return_button.SetFont(gui_support.font_factory(13, wx.FONTWEIGHT_NORMAL))
-
         rectbox = wx.StaticBox(self.frame_modal, -1)
         rectsizer = wx.StaticBoxSizer(rectbox, wx.HORIZONTAL)
         rectsizer.Add(self.copy_button, 0, wx.EXPAND | wx.RIGHT, 5)
         rectsizer.Add(self.select_button, 0, wx.EXPAND | wx.LEFT, 5)
 
-
+        
         sizer = wx.BoxSizer(wx.VERTICAL)
         sizer.AddSpacer(10)
         sizer.Add(title_label, 0, wx.ALIGN_CENTRE | wx.ALL, 0)
         sizer.Add(self.list, 1, wx.EXPAND | wx.ALL, 10)
         sizer.Add(rectsizer, 0, wx.ALIGN_CENTRE | wx.ALL, 0)
+       
         sizer.AddSpacer(10)
         sizer.Add(return_button, 0, wx.ALIGN_CENTRE | wx.BOTTOM, 15)
 
@@ -764,8 +765,10 @@ class macOSInstallerDownloadFrame(wx.Frame):
             if frame:
                 frame.Destroy()
         '''
-        wx.MessageDialog(self.frame_modal, "学业繁忙，此处未完工（gui_simplehac_dmg_flash.py为残品），请下载etcher自行刻录！\n现在为你打开SimpleHac加速镜像下载etcher", "", wx.OK | wx.ICON_INFORMATION).ShowModal()
-        webbrowser.open("https://download.simplehac.cn/https://github.com/balena-io/etcher/releases/download/v1.19.25/balenaEtcher-1.19.25-x64.dmg")
+        el=wx.MessageDialog(self.frame_modal, "学业繁忙，此处未完工\n（gui_simplehac_dmg_flash.py为残品），请下载etcher自行刻录！\n你需要打开SimpleHac加速镜像下载etcher吗?", "", wx.YES_NO | wx.ICON_INFORMATION)
+        
+        if el.ShowModal()==wx.ID_YES:
+            webbrowser.open("https://download.simplehac.cn/https://github.com/balena-io/etcher/releases/download/v1.19.25/balenaEtcher-1.19.25-darwin-x64.dmg")
 
     def on_return(self, event: wx.Event) -> None:
         """

@@ -187,7 +187,6 @@ class DownloadKDKFrame(wx.Frame):
         拉取KDK数据，自动判断是否使用代理，拉取后填充到列表控件。
         该方法在新线程中调用，防止主界面卡死。
         """
-        time.sleep(1)  # 模拟加载动画
         if self.constants.use_github_proxy == True:
             KDK_API_LINK: str = KDK_API_LINK_PROXY
         else:

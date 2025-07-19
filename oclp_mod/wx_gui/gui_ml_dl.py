@@ -128,11 +128,11 @@ class DownloadMLFrame(wx.Frame):
         self.Show()
         self.loading_frame = LoadingFrame(self, title="正在加载")
         self.loading_frame.Show()
-        #time.sleep(2)
+        
         self.fetch_MetalLib_data()
 
     def fetch_MetalLib_data(self):
-        time.sleep(1)
+        
         if self.constants.use_github_proxy == True:
             METALLIB_API_LINK: str = METALLIB_API_LINK_PROXY
         else:
