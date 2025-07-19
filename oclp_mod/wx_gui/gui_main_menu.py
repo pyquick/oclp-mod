@@ -109,8 +109,7 @@ class MainFrame(wx.Frame):
                 "function": self.on_download_kdk_package,
                 "description": [
                     "提供kdk下载",
-                    "这是下载所必须的,",
-                    "提供simplehac下载地址."
+                    "这是OCLP打补丁所必须的(macOS 13+)",
                 ],
                 "icon": str(self.constants.icns_resource_path / "Package.icns"),
             },
@@ -132,8 +131,7 @@ class MainFrame(wx.Frame):
                 "function": self.on_download_ml_package,
                 "description": [
                     "提供MetalLib下载",
-                    "这是Metal3802下载所必须的,",
-                    "提供simplehac下载地址."
+                    "这是Metal3802 GPU所必须的",
                 ],
                 "icon": str(self.constants.icns_resource_path / "Package.icns"),
             },
@@ -244,18 +242,19 @@ class MainFrame(wx.Frame):
             self.constants.has_checked_updates = True
             pop_up = wx.MessageDialog(
                 self,
-                f"OCLP-Mod has been updated to the latest version: {self.constants.patcher_version}\n\nWould you like to update OpenCore and your root volume patches?",
+                #                                                           Would you like to update OpenCore and your root volume patches
+                f"OCLP-Mod 已更新到最新版: {self.constants.patcher_version}\n\n你希望更新OpenCore以及你的root volume补丁吗?",
                 "更新成功!",
                 style=wx.YES_NO | wx.YES_DEFAULT | wx.ICON_INFORMATION
             )
             pop_up.ShowModal()
 
             if pop_up.GetReturnCode() != wx.ID_YES:
-                logging.info("Skipping OpenCore and root volume patch update...")
+                logging.info("跳过 OpenCore 和 root volume 补丁更新...")
                 return
 
 
-            logging.info("Updating OpenCore and root volume patches...")
+            logging.info("跳过 OpenCore 和 root volume 补丁更新...")
             self.constants.update_stage = gui_support.AutoUpdateStages.CHECKING
             self.Hide()
             pos = self.GetPosition()
